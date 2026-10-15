@@ -9,7 +9,7 @@ PORTFOLIO_DATA = {
         "name": "Sadhira Amani",
         "full_name": "Amani Sadhira",
         "role": "Software Engineer & Full Stack Developer",
-        "headline": "Motivated and enthusiastic Computer Science and Engineering student seeking an entry-levelopportunity as a Software Engineer to apply programming and web development skills.",
+        "headline": "Motivated and enthusiastic Computer Science and Engineering student seeking an entry-level opportunity as a Software Engineer to apply programming and web development skills.",
         "about_intro": "I'm a passionate Computer Science and Engineering student at Kamala Institute of Technology and Science with a strong academic foundation (9.07 CGPA). I specialize in developing end-to-end full stack web applications using Java Spring Boot, the MERN stack, MySQL, and modern JavaScript. I love transforming real-world problems into clean, scalable, and elegant digital solutions.",
         "email": "amanisadhira64@gmail.com",
         "phone": "+91 9493005538",

@@ -1,7 +1,7 @@
 /**
  * Sadhira Amani - Personal Portfolio Script
  * Interactive behaviors, navigation scrollspy, IntersectionObserver reveals,
- * animated skill bars, mail composer, and copy-to-clipboard.
+ * skill category filters, mail composer, and copy-to-clipboard.
  */
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -37,84 +37,73 @@ PORTFOLIO_DATA = {
             "name": "Programming Languages",
             "icon": "code",
             "skills": [
-                {"name": "Python", "level": "Proficient", "icon": "python"},
-                {"name": "Java", "level": "Advanced", "icon": "java"},
-                {"name": "C", "level": "Intermediate", "icon": "c"}
+                {"name": "Python", "icon": "python"},
+                {"name": "Java", "icon": "java"},
+                {"name": "C", "icon": "c"}
             ]
         },
         {
             "name": "Frontend Development",
             "icon": "layout",
             "skills": [
-                {"name": "HTML5", "level": "Advanced", "icon": "html5"},
-                {"name": "CSS3", "level": "Advanced", "icon": "css3"},
-                {"name": "JavaScript", "level": "Proficient", "icon": "javascript"},
-                {"name": "React JS", "level": "Proficient", "icon": "react"}
+                {"name": "HTML5", "icon": "html5"},
+                {"name": "CSS3", "icon": "css3"},
+                {"name": "JavaScript", "icon": "javascript"},
+                {"name": "React JS", "icon": "react"}
             ]
         },
         {
             "name": "Databases & Storage",
             "icon": "database",
             "skills": [
-                {"name": "MySQL", "level": "Proficient", "icon": "mysql"},
-                {"name": "MongoDB", "level": "Proficient", "icon": "mongodb"},
-                {"name": "Cloudinary", "level": "Integration", "icon": "cloud"}
+                {"name": "MySQL", "icon": "mysql"},
+                {"name": "MongoDB", "icon": "mongodb"},
+                {"name": "Cloudinary", "icon": "cloud"}
             ]
         },
         {
             "name": "Developer Tools",
             "icon": "tool",
             "skills": [
-                {"name": "Git", "level": "Proficient", "icon": "git"},
-                {"name": "GitHub", "level": "Proficient", "icon": "github"},
-                {"name": "Visual Studio Code", "level": "Proficient", "icon": "vscode"}
+                {"name": "Git", "icon": "git"},
+                {"name": "GitHub", "icon": "github"},
+                {"name": "Visual Studio Code", "icon": "vscode"}
             ]
         }
     ],
     "projects": [
         {
-            "title": "StellarStore – E-Commerce Web Application",
-            "category": "Full Stack Application",
-            "badge": "Full Stack • E-Commerce",
+            "number": "01",
+            "title": "StellarStore",
+            "category": "E-Commerce Web Application",
+            "description": "An e-commerce web application for browsing and managing books and stationery products.",
             "tech_stack": ["Java", "Spring Boot", "MySQL", "HTML", "CSS", "JavaScript", "Cloudinary"],
-            "description": "A full-featured e-commerce platform designed for browsing, ordering, and managing books and stationery items with seamless product inventory workflows.",
-            "bullet_points": [
-                "Developed a full-stack e-commerce web application for browsing and managing books and stationery products.",
-                "Integrated Cloudinary for robust, scalable product image storage and media asset management.",
-                "Designed REST APIs and relational database integration to manage product information and transactions efficiently."
-            ],
+            "image": "projects/stellarstore.png",
             "live_url": "https://mini-ecommerce-3g26.onrender.com",
-            "github_url": "https://github.com/Sadhira-Amani025/mini_ecommerce",
-            "status": "Live on Render"
+            "github_url": "https://github.com/Sadhira-Amani025/mini-ecommerce-website",
+            "primary_url": "https://mini-ecommerce-3g26.onrender.com"
         },
         {
-            "title": "LABHANTE AUTOMOTIVE STUDIO",
-            "category": "MERN Stack Project",
-            "badge": "MERN Stack • Booking System",
-            "tech_stack": ["React JS", "Node JS", "Express JS", "MongoDB", "REST APIs"],
-            "description": "A full-stack automotive service application enabling clients to explore vehicle services, schedule appointments, and manage service bookings seamlessly.",
-            "bullet_points": [
-                "Developed a full-stack automotive service web application using the MERN stack with a responsive, modern interface.",
-                "Implemented secure user authentication and role-based access control (Admin/User), allowing administrators to manage products and bookings securely.",
-                "Designed responsive user interfaces and integrated RESTful APIs with MongoDB for high-performance data retrieval."
-            ],
+            "number": "02",
+            "title": "Labhante Automotive Studio",
+            "category": "Mern stack Application",
+            "description": "A full-stack automotive service platform with vehicle services, appointment scheduling, and booking management.",
+            "tech_stack": ["React", "Node.js", "Express.js", "MongoDB"],
+            "image": "projects/labhante.png",
             "live_url": None,
             "github_url": "https://github.com/Sadhira-Amani025/smartcar-solutions",
-            "status": "Completed Repository"
+            "primary_url": "https://github.com/Sadhira-Amani025/smartcar-solutions"
         },
         {
-            "title": "FIRST AID GUIDE",
-            "category": "Web Development",
-            "badge": "Web Application • Emergency Guide",
+            "number": "03",
+            "title": "First Aid Guide",
+            "category": "Web Application & Emergency Guide",
+            "description": "A web application providing accessible first-aid information and guidance for common injuries and emergencies.",
             "tech_stack": ["HTML", "CSS", "JavaScript", "Responsive Design"],
-            "description": "An emergency first-aid resource platform providing immediate, structured guidance for medical situations and injuries.",
-            "bullet_points": [
-                "Developed a web-based First Aid Guide to provide quick access to emergency first-aid procedures for common injuries and medical emergencies.",
-                "Collaborated with teammates and implemented intuitive content categorization and rapid navigation to assist users during critical scenarios."
-            ],
-            "live_url": None,
-            "github_url": "https://github.com/Sadhira-Amani025/SCT_WD_1",
-            "status": "Completed Project"
+            "image": "projects/firstaid.png",
+            "live_url": "https://srinadh204.github.io/firstaidguides/",
+            "github_url": "https://github.com/srinadh204/firstaidguides",
+            "primary_url": "https://srinadh204.github.io/firstaidguides/"
         }
     ],
     "internships": [
@@ -141,7 +130,7 @@ PORTFOLIO_DATA = {
         {
             "value": "9.07",
             "label": "CGPA in B.Tech CSE",
-            "subtext": "Kamala Institute of Tech & Science"
+            "subtext": "Kamala Institute of Technology & Science"
         },
         {
             "value": "3+",

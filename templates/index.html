@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ data.profile.name }} | Software Engineer &amp; Full Stack Developer</title>
-  
+
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Portfolio of {{ data.profile.name }}, Computer Science student &amp; Software Engineer specializing in Java Spring Boot, MERN stack, MySQL, and full-stack web applications.">
+  <meta name="description"
+    content="Portfolio of {{ data.profile.name }}, Computer Science student &amp; Software Engineer specializing in Java Spring Boot, MERN stack, MySQL, and full-stack web applications.">
   <meta name="author" content="{{ data.profile.name }}">
-  <meta name="keywords" content="Sadhira Amani, Portfolio, Software Engineer, Full Stack Developer, Java, Spring Boot, MERN, React, MongoDB, MySQL">
-  
+  <meta name="keywords"
+    content="Sadhira Amani, Portfolio, Software Engineer, Full Stack Developer, Java, Spring Boot, MERN, React, MongoDB, MySQL">
+
   <!-- Open Graph / Social Sharing -->
   <meta property="og:title" content="{{ data.profile.name }} | Software Engineer &amp; Full Stack Developer">
-  <meta property="og:description" content="Motivated Computer Science student &amp; developer passionate about building scalable full-stack applications and clean APIs.">
+  <meta property="og:description"
+    content="Motivated Computer Science student &amp; developer passionate about building scalable full-stack applications and clean APIs.">
   <meta property="og:image" content="{{ url_for('static', filename='images/profile.png') }}">
   <meta property="og:type" content="website">
 
@@ -22,11 +26,14 @@
   <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body class="page-preload">
 
   <!-- Minimal Elegant Page Loader Progress Line -->
@@ -43,7 +50,7 @@
        ========================================================================== -->
   <header class="site-header" id="siteHeader">
     <div class="container nav-container">
-      
+
       <!-- Brand Logo -->
       <a href="#home" class="brand-logo" aria-label="{{ data.profile.name }} Home">
         <div class="brand-icon-wrapper">
@@ -63,8 +70,10 @@
           <li><a href="#credentials" class="nav-link">Credentials</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
           <li class="mobile-nav-action">
-            <a href="{{ url_for('download_resume') }}" class="btn-nav-download mobile-download-btn" download="Amani_Sadhira_Resume.pdf" title="Download Resume PDF">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <a href="{{ url_for('download_resume') }}" class="btn-nav-download mobile-download-btn"
+              download="Amani_Sadhira_Resume.pdf" title="Download Resume PDF">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="7 10 12 15 17 10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -77,8 +86,10 @@
 
       <!-- Nav Actions -->
       <div class="nav-actions">
-        <a href="{{ url_for('download_resume') }}" class="btn-nav-download" download="Amani_Sadhira_Resume.pdf" title="Download Resume PDF">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <a href="{{ url_for('download_resume') }}" class="btn-nav-download" download="Amani_Sadhira_Resume.pdf"
+          title="Download Resume PDF">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <polyline points="7 10 12 15 17 10"></polyline>
             <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -87,7 +98,8 @@
         </a>
 
         <!-- Mobile Menu Toggle Button -->
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation menu"
+          aria-expanded="false">
           <span></span>
           <span></span>
           <span></span>
@@ -108,7 +120,7 @@
     <!-- 1. HERO SECTION -->
     <section class="hero-section" id="home">
       <div class="container hero-grid">
-        
+
         <!-- Left Content with Staggered Entrance Animations -->
         <div class="hero-content">
           <span class="hero-pretitle hero-anim hero-anim-1">HELLO!</span>
@@ -123,14 +135,16 @@
           <div class="hero-cta-group hero-anim hero-anim-5">
             <a href="#contact" class="btn-primary-pill">
               <span>Let's talk</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
             </a>
 
             <a href="{{ url_for('download_resume') }}" class="btn-secondary-pill" download="Amani_Sadhira_Resume.pdf">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="7 10 12 15 17 10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -142,31 +156,41 @@
           <!-- Social Icons Row -->
           <div class="hero-social-row hero-anim hero-anim-6">
             <!-- LinkedIn -->
-            <a href="{{ data.profile.linkedin }}" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="LinkedIn Profile" title="LinkedIn Profile">
+            <a href="{{ data.profile.linkedin }}" target="_blank" rel="noopener noreferrer" class="social-circle-btn"
+              aria-label="LinkedIn Profile" title="LinkedIn Profile">
               <svg viewBox="0 0 24 24">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                <path
+                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
               </svg>
             </a>
 
             <!-- GitHub -->
-            <a href="{{ data.profile.github }}" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="GitHub Profile" title="GitHub Profile">
+            <a href="{{ data.profile.github }}" target="_blank" rel="noopener noreferrer" class="social-circle-btn"
+              aria-label="GitHub Profile" title="GitHub Profile">
               <svg viewBox="0 0 24 24">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
               </svg>
             </a>
 
             <!-- Email -->
-            <a href="mailto:{{ data.profile.email }}" class="social-circle-btn" aria-label="Email Address" title="Send Email">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <a href="mailto:{{ data.profile.email }}" class="social-circle-btn" aria-label="Email Address"
+              title="Send Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
             </a>
 
             <!-- Phone -->
-            <a href="tel:{{ data.profile.phone_clean }}" class="social-circle-btn" aria-label="Call Phone" title="Call Phone">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            <a href="tel:{{ data.profile.phone_clean }}" class="social-circle-btn" aria-label="Call Phone"
+              title="Call Phone">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                </path>
               </svg>
             </a>
           </div>
@@ -187,12 +211,8 @@
             <div class="hero-avatar-ring" aria-hidden="true"></div>
 
             <!-- Profile Image -->
-            <img 
-              src="{{ url_for('static', filename='images/profile.png') }}" 
-              alt="{{ data.profile.name }}" 
-              class="hero-avatar-img"
-              loading="eager"
-            >
+            <img src="{{ url_for('static', filename='images/profile.png') }}" alt="{{ data.profile.name }}"
+              class="hero-avatar-img" loading="eager">
           </div>
         </div>
 
@@ -209,12 +229,8 @@
             <div class="about-blob-wrapper">
               <div class="about-blob-glow" aria-hidden="true"></div>
               <div class="about-blob-shape">
-                <img 
-                  src="{{ url_for('static', filename='images/profile.png') }}" 
-                  alt="{{ data.profile.name }} Portrait" 
-                  class="about-blob-img"
-                  loading="lazy"
-                >
+                <img src="{{ url_for('static', filename='images/profile.png') }}" alt="{{ data.profile.name }} Portrait"
+                  class="about-blob-img" loading="lazy">
               </div>
               <!-- Floating decorative accent -->
               <span class="about-sparkle" aria-hidden="true">✦</span>
@@ -227,7 +243,7 @@
             <h2 class="section-title">
               Turning Ideas Into <span class="gradient-text">Digital Reality</span>
             </h2>
-            
+
             <div class="about-narrative">
               <p>{{ data.profile.about_intro }}</p>
             </div>
@@ -237,7 +253,8 @@
               {% for item in data.highlights %}
               <div class="metric-card">
                 <div class="metric-icon-val">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                   <span class="metric-val">{{ item.value }}</span>
@@ -250,7 +267,8 @@
 
             <a href="#contact" class="btn-about-hire">
               <span>Let's Connect</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
@@ -265,7 +283,7 @@
     <!-- 3. TECHNICAL SKILLS SECTION -->
     <section class="skills-section" id="skills">
       <div class="container">
-        
+
         <div class="reveal-on-scroll">
           <span class="section-tag">MY SKILLS</span>
           <h2 class="section-title">
@@ -280,27 +298,49 @@
         <div class="skills-filter-nav reveal-on-scroll" role="tablist">
           <button class="skill-filter-btn active" data-category="all">All Skills</button>
           {% for cat in data.skill_categories %}
-          <button class="skill-filter-btn" data-category="{{ cat.name|lower|replace(' ', '-')|replace('&', 'and') }}">{{ cat.name }}</button>
+          <button class="skill-filter-btn" data-category="{{ cat.name|lower|replace(' ', '-')|replace('&', 'and') }}">{{
+            cat.name }}</button>
           {% endfor %}
         </div>
 
         <!-- Skills Categories Display -->
         <div class="skills-categories-grid">
           {% for cat in data.skill_categories %}
-          <div class="skill-category-block reveal-on-scroll" data-category="{{ cat.name|lower|replace(' ', '-')|replace('&', 'and') }}">
-            
+          <div class="skill-category-block reveal-on-scroll"
+            data-category="{{ cat.name|lower|replace(' ', '-')|replace('&', 'and') }}">
+
             <div class="category-header">
               <div class="category-icon-box">
                 {% if cat.icon == 'code' %}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
                 {% elif cat.icon == 'layout' %}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="3" y1="9" x2="21" y2="9"></line>
+                  <line x1="9" y1="21" x2="9" y2="9"></line>
+                </svg>
                 {% elif cat.icon == 'server' %}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                  <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                  <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                  <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                </svg>
                 {% elif cat.icon == 'database' %}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                </svg>
                 {% else %}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path
+                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
+                  </path>
+                </svg>
                 {% endif %}
               </div>
               <h3 class="category-title">{{ cat.name }}</h3>
@@ -333,16 +373,7 @@
                 </div>
 
                 <div class="skill-info">
-                  <div class="skill-name-row">
-                    <span class="skill-name">{{ skill.name }}</span>
-                    <span class="skill-level-tag">{{ skill.level }}</span>
-                  </div>
-                  <!-- Glowing Animated Progress Bar Track -->
-                  <div class="skill-bar-track" aria-hidden="true">
-                    <div class="skill-bar-fill" 
-                      style="--target-width: {% if skill.level == 'Advanced' %}92%{% elif skill.level == 'Proficient' %}85%{% elif skill.level == 'Intermediate' %}78%{% else %}80%{% endif %};">
-                    </div>
-                  </div>
+                  <span class="skill-name">{{ skill.name }}</span>
                 </div>
 
               </div>
@@ -359,69 +390,68 @@
     <!-- 4. PROJECTS SECTION -->
     <section class="projects-section" id="projects">
       <div class="container">
-        
-        <div class="reveal-on-scroll">
-          <span class="section-tag">MY PROJECTS</span>
-          <h2 class="section-title">
-            Featured <span class="gradient-text">Projects</span>
-          </h2>
-          <p class="section-subtitle">
-            Hands-on full-stack web applications built with modern engineering practices, databases, and authentication.
-          </p>
+
+        <!-- Header Row with FEATURED PROJECTS -->
+        <div class="projects-header-row reveal-on-scroll">
+          <div class="projects-header-left">
+            <span class="section-tag">MY PROJECTS</span>
+            <h2 class="section-title projects-heading">
+              FEATURED <span class="gradient-purple">PROJECTS</span>
+            </h2>
+            <p class="section-subtitle">
+              Hands-on full-stack web applications built with modern engineering practices, databases, and authentication.
+            </p>
+          </div>
         </div>
 
         <div class="projects-grid">
           {% for project in data.projects %}
           <article class="project-card reveal-on-scroll">
-            
-            <div class="project-card-top">
-              <div class="project-header">
-                <span class="project-badge">{{ project.badge }}</span>
-                <div class="project-status-dot">
-                  <span class="status-indicator {% if not project.live_url %}repo-only{% endif %}"></span>
-                  <span>{{ project.status }}</span>
-                </div>
-              </div>
 
-              <h3 class="project-title">{{ project.title }}</h3>
-              <p class="project-desc">{{ project.description }}</p>
+            <!-- Numbered square badge (01, 02, 03) at top-left -->
+            <div class="project-num-badge" aria-label="Project {{ project.number }}">{{ project.number }}</div>
 
-              <!-- Resume Bullet Points -->
-              <ul class="project-bullets">
-                {% for point in project.bullet_points %}
-                <li>{{ point }}</li>
-                {% endfor %}
-              </ul>
-
-              <!-- Tech Stack Pills -->
-              <div class="project-tags">
-                {% for tech in project.tech_stack %}
-                <span class="tech-tag">{{ tech }}</span>
-                {% endfor %}
-              </div>
+            <!-- Large Website Screenshot Preview -->
+            <div class="project-image-box">
+              <img src="{{ url_for('static', filename='images/' + project.image) }}" alt="{{ project.title }} Website Preview" class="project-img" loading="lazy">
             </div>
 
-            <!-- Project Card Actions -->
-            <div class="project-footer">
-              {% if project.live_url %}
-              <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer" class="btn-project-live">
-                <span>Live Demo</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-              </a>
-              {% endif %}
+            <!-- Card Content Below Screenshot -->
+            <div class="project-card-body">
+              <span class="project-category-tag">{{ project.category }}</span>
 
-              {% if project.github_url %}
-              <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="btn-project-repo">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                <span>GitHub Repo</span>
-              </a>
-              {% endif %}
+              <div class="project-title-row">
+                <h3 class="project-title">
+                  <a href="{{ project.primary_url }}" target="_blank" rel="noopener noreferrer" class="project-title-link">
+                    {{ project.title }}
+                  </a>
+                </h3>
+              </div>
+
+              <p class="project-desc">{{ project.description }}</p>
+
+              <!-- Action Links (Live Demo & GitHub Repo) -->
+              <div class="project-footer">
+                {% if project.live_url %}
+                <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer" class="project-link-btn live-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                  <span>Live Demo</span>
+                </a>
+                {% endif %}
+
+                {% if project.github_url %}
+                <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="project-link-btn repo-btn">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  <span>GitHub</span>
+                </a>
+                {% endif %}
+              </div>
             </div>
 
           </article>
@@ -434,7 +464,7 @@
     <!-- 5. EDUCATION SECTION -->
     <section class="education-section" id="education">
       <div class="container">
-        
+
         <div class="reveal-on-scroll">
           <span class="section-tag">ACADEMIC BACKGROUND</span>
           <h2 class="section-title">
@@ -480,7 +510,7 @@
     <!-- 6. INTERNSHIPS & CERTIFICATIONS SECTION -->
     <section class="credentials-section" id="credentials">
       <div class="container">
-        
+
         <div class="reveal-on-scroll">
           <span class="section-tag">CREDENTIALS</span>
           <h2 class="section-title">
@@ -492,7 +522,7 @@
         </div>
 
         <div class="credentials-grid">
-          
+
           <!-- Column 1: Internships -->
           <div class="cred-column reveal-on-scroll">
             <h3>
@@ -548,22 +578,23 @@
     <!-- 7. CONTACT SECTION -->
     <section class="contact-section" id="contact">
       <div class="container">
-        
+
         <div class="reveal-on-scroll">
           <span class="section-tag">GET IN TOUCH</span>
           <h2 class="section-title">
             Let's Build Something <span class="gradient-text">Together</span>
           </h2>
           <p class="section-subtitle">
-            I am actively seeking Software Engineer and Full Stack Developer opportunities. Feel free to contact me directly!
+            I am actively seeking Software Engineer and Full Stack Developer opportunities. Feel free to contact me
+            directly!
           </p>
         </div>
 
         <div class="contact-grid">
-          
+
           <!-- Left: Direct Verified Channels -->
           <div class="contact-info-block reveal-on-scroll">
-            
+
             <!-- Email Channel -->
             <div class="contact-card-channel">
               <div class="channel-left">
@@ -578,7 +609,8 @@
                   <a href="mailto:{{ data.profile.email }}" class="channel-value">{{ data.profile.email }}</a>
                 </div>
               </div>
-              <button class="channel-action-btn btn-copy-email" data-email="{{ data.profile.email }}" title="Copy Email">
+              <button class="channel-action-btn btn-copy-email" data-email="{{ data.profile.email }}"
+                title="Copy Email">
                 <span>Copy</span>
               </button>
             </div>
@@ -588,7 +620,9 @@
               <div class="channel-left">
                 <div class="channel-icon-box">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                    </path>
                   </svg>
                 </div>
                 <div class="channel-details">
@@ -606,15 +640,18 @@
               <div class="channel-left">
                 <div class="channel-icon-box">
                   <svg viewBox="0 0 24 24">
-                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    <path
+                      d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                   </svg>
                 </div>
                 <div class="channel-details">
                   <span class="channel-title">LinkedIn</span>
-                  <a href="{{ data.profile.linkedin }}" target="_blank" rel="noopener noreferrer" class="channel-value">Sadhira Amani</a>
+                  <a href="{{ data.profile.linkedin }}" target="_blank" rel="noopener noreferrer"
+                    class="channel-value">Sadhira Amani</a>
                 </div>
               </div>
-              <a href="{{ data.profile.linkedin }}" target="_blank" rel="noopener noreferrer" class="channel-action-btn">
+              <a href="{{ data.profile.linkedin }}" target="_blank" rel="noopener noreferrer"
+                class="channel-action-btn">
                 <span>Visit ↗</span>
               </a>
             </div>
@@ -624,12 +661,14 @@
               <div class="channel-left">
                 <div class="channel-icon-box">
                   <svg viewBox="0 0 24 24">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    <path
+                      d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                   </svg>
                 </div>
                 <div class="channel-details">
                   <span class="channel-title">GitHub</span>
-                  <a href="{{ data.profile.github }}" target="_blank" rel="noopener noreferrer" class="channel-value">Sadhira-Amani025</a>
+                  <a href="{{ data.profile.github }}" target="_blank" rel="noopener noreferrer"
+                    class="channel-value">Sadhira-Amani025</a>
                 </div>
               </div>
               <a href="{{ data.profile.github }}" target="_blank" rel="noopener noreferrer" class="channel-action-btn">
@@ -643,13 +682,15 @@
           <div class="contact-composer-card reveal-on-scroll">
             <h3 class="composer-title">Quick Message Composer</h3>
             <p class="composer-subtitle">
-              Draft your message below. Clicking send will open your default email client with your message pre-filled for <strong>{{ data.profile.email }}</strong>.
+              Draft your message below. Clicking send will open your default email client with your message pre-filled
+              for <strong>{{ data.profile.email }}</strong>.
             </p>
 
             <form id="emailComposerForm" class="composer-form">
               <div class="form-group">
                 <label for="senderName">Your Name</label>
-                <input type="text" id="senderName" class="form-input" placeholder="e.g. Hiring Manager / John Doe" required>
+                <input type="text" id="senderName" class="form-input" placeholder="e.g. Hiring Manager / John Doe"
+                  required>
               </div>
 
               <div class="form-group">
@@ -659,17 +700,21 @@
 
               <div class="form-group">
                 <label for="emailSubject">Subject</label>
-                <input type="text" id="emailSubject" class="form-input" value="Software Engineer Opportunity - Sadhira Amani" required>
+                <input type="text" id="emailSubject" class="form-input"
+                  value="Software Engineer Opportunity - Sadhira Amani" required>
               </div>
 
               <div class="form-group">
                 <label for="emailMessage">Message</label>
-                <textarea id="emailMessage" class="form-textarea" placeholder="Hello Sadhira, we came across your portfolio and would love to speak about..." required></textarea>
+                <textarea id="emailMessage" class="form-textarea"
+                  placeholder="Hello Sadhira, we came across your portfolio and would love to speak about..."
+                  required></textarea>
               </div>
 
               <button type="submit" class="btn-send-mailto">
                 <span>Open in Email App</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                  stroke-linejoin="round">
                   <line x1="22" y1="2" x2="11" y2="13"></line>
                   <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                 </svg>
@@ -690,7 +735,7 @@
        ========================================================================== -->
   <footer class="site-footer">
     <div class="container footer-container">
-      
+
       <div class="footer-top-row">
         <div class="footer-brand">
           <div class="brand-icon-wrapper">
@@ -710,11 +755,19 @@
         </ul>
 
         <div class="footer-socials">
-          <a href="{{ data.profile.github }}" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="GitHub">
-            <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          <a href="{{ data.profile.github }}" target="_blank" rel="noopener noreferrer" class="social-circle-btn"
+            aria-label="GitHub">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
           </a>
-          <a href="{{ data.profile.linkedin }}" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          <a href="{{ data.profile.linkedin }}" target="_blank" rel="noopener noreferrer" class="social-circle-btn"
+            aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+            </svg>
           </a>
         </div>
       </div>
@@ -726,7 +779,8 @@
 
         <a href="#home" class="btn-back-to-top" id="backToTopBtn">
           <span>Back to Top</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round">
             <polyline points="18 15 12 9 6 15"></polyline>
           </svg>
         </a>
@@ -743,4 +797,5 @@
   <!-- JavaScript -->
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
+
 </html>

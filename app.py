@@ -80,7 +80,7 @@ PORTFOLIO_DATA = {
             "tech_stack": ["Java", "Spring Boot", "MySQL", "HTML", "CSS", "JavaScript", "Cloudinary"],
             "image": "projects/stellarstore.png",
             "live_url": "https://mini-ecommerce-3g26.onrender.com",
-            "github_url": "https://github.com/Sadhira-Amani025/mini-ecommerce",
+            "github_url": "https://github.com/Sadhira-Amani025/mini_ecommerce",
             "primary_url": "https://mini-ecommerce-3g26.onrender.com"
         },
         {

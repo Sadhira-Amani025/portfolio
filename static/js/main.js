@@ -236,4 +236,253 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // 10. 3D Credentials Carousel & Certificate Lightbox Modal
+  const credOuter = document.getElementById('credCarouselOuter');
+  const credStage = document.getElementById('credCarouselStage');
+  const credCards = document.querySelectorAll('.cred-3d-card');
+  const credPrevBtn = document.getElementById('credPrevBtn');
+  const credNextBtn = document.getElementById('credNextBtn');
+  const credDots = document.querySelectorAll('.cred-dot-item');
+  const credCounterActive = document.querySelector('.cred-index-active');
+  const credCounterTotal = document.querySelector('.cred-index-total');
+
+  const certModal = document.getElementById('certLightboxModal');
+  const certOverlay = document.getElementById('certLightboxOverlay');
+  const certClose = document.getElementById('certLightboxClose');
+  const certTitle = document.getElementById('certLightboxTitle');
+  const certIssuer = document.getElementById('certLightboxIssuer');
+  const certImg = document.getElementById('certLightboxImg');
+  const certOpenTab = document.getElementById('certLightboxOpenTab');
+  const viewCertBtns = document.querySelectorAll('.btn-cred-view-cert');
+  const thumbContainers = document.querySelectorAll('.cred-thumb-container');
+
+  if (credCards.length > 0) {
+    let currentCredIndex = 0;
+    const totalCreds = credCards.length;
+
+    // Set initial total count
+    if (credCounterTotal) {
+      credCounterTotal.textContent = String(totalCreds).padStart(2, '0');
+    }
+
+    const updateCredentialsCarousel = (newIndex) => {
+      // Circular wrapping
+      currentCredIndex = ((newIndex % totalCreds) + totalCreds) % totalCreds;
+
+      credCards.forEach((card, idx) => {
+        // Reset all placement classes
+        card.classList.remove(
+          'card-active',
+          'card-prev',
+          'card-next',
+          'card-hidden-left',
+          'card-hidden-right'
+        );
+
+        // Calculate circular shortest offset relative to current card
+        let offset = idx - currentCredIndex;
+        while (offset > totalCreds / 2) offset -= totalCreds;
+        while (offset < -totalCreds / 2) offset += totalCreds;
+
+        if (offset === 0) {
+          card.classList.add('card-active');
+          card.setAttribute('aria-hidden', 'false');
+        } else if (offset === -1) {
+          card.classList.add('card-prev');
+          card.setAttribute('aria-hidden', 'true');
+        } else if (offset === 1) {
+          card.classList.add('card-next');
+          card.setAttribute('aria-hidden', 'true');
+        } else if (offset < -1) {
+          card.classList.add('card-hidden-left');
+          card.setAttribute('aria-hidden', 'true');
+        } else {
+          card.classList.add('card-hidden-right');
+          card.setAttribute('aria-hidden', 'true');
+        }
+      });
+
+      // Update Pagination Dots
+      credDots.forEach((dot, idx) => {
+        const isActive = idx === currentCredIndex;
+        dot.classList.toggle('active', isActive);
+        dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      // Update Number Indicator
+      if (credCounterActive) {
+        credCounterActive.textContent = String(currentCredIndex + 1).padStart(2, '0');
+      }
+    };
+
+    // Navigation Arrow Buttons
+    if (credPrevBtn) {
+      credPrevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        updateCredentialsCarousel(currentCredIndex - 1);
+      });
+    }
+
+    if (credNextBtn) {
+      credNextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        updateCredentialsCarousel(currentCredIndex + 1);
+      });
+    }
+
+    // Pagination Dots Click
+    credDots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const idx = parseInt(dot.getAttribute('data-index'), 10);
+        if (!isNaN(idx)) {
+          updateCredentialsCarousel(idx);
+        }
+      });
+    });
+
+    // Click Neighboring Cards to Select Them
+    credCards.forEach((card) => {
+      card.addEventListener('click', (e) => {
+        // If clicking on a button or link inside the card, don't slide
+        if (e.target.closest('button') || e.target.closest('a')) {
+          return;
+        }
+
+        if (card.classList.contains('card-prev')) {
+          updateCredentialsCarousel(currentCredIndex - 1);
+        } else if (card.classList.contains('card-next')) {
+          updateCredentialsCarousel(currentCredIndex + 1);
+        }
+      });
+    });
+
+    // Keyboard Navigation (ArrowLeft / ArrowRight)
+    if (credOuter) {
+      credOuter.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          updateCredentialsCarousel(currentCredIndex - 1);
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          updateCredentialsCarousel(currentCredIndex + 1);
+        }
+      });
+    }
+
+    // Mobile / Tablet Touch Swipe Support
+    if (credStage) {
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchEndX = 0;
+      let touchEndY = 0;
+
+      credStage.addEventListener(
+        'touchstart',
+        (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+          touchStartY = e.changedTouches[0].screenY;
+        },
+        { passive: true }
+      );
+
+      credStage.addEventListener(
+        'touchend',
+        (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          touchEndY = e.changedTouches[0].screenY;
+          handleSwipeGesture();
+        },
+        { passive: true }
+      );
+
+      const handleSwipeGesture = () => {
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+        const swipeThreshold = 40;
+
+        if (Math.abs(diffX) > swipeThreshold && Math.abs(diffX) > Math.abs(diffY)) {
+          if (diffX < 0) {
+            // Swiped left -> next card
+            updateCredentialsCarousel(currentCredIndex + 1);
+          } else {
+            // Swiped right -> previous card
+            updateCredentialsCarousel(currentCredIndex - 1);
+          }
+        }
+      };
+    }
+
+    // Initialize 3D Carousel
+    updateCredentialsCarousel(0);
+  }
+
+  // Certificate Lightbox Modal Handling
+  const openCertificateModal = ({ title, issuer, imgUrl }) => {
+    if (!certModal) return;
+
+    if (certTitle) certTitle.textContent = title || 'Certificate Preview';
+    if (certIssuer) certIssuer.textContent = issuer || 'Issuing Body';
+
+    if (certImg) {
+      certImg.src = imgUrl || '';
+      certImg.alt = `${title} Certificate Preview`;
+    }
+
+    if (certOpenTab) {
+      certOpenTab.href = imgUrl || '#';
+    }
+
+    certModal.classList.add('open');
+    certModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeCertificateModal = () => {
+    if (!certModal) return;
+    certModal.classList.remove('open');
+    certModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  // Connect "View Certificate" buttons
+  viewCertBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const title = btn.getAttribute('data-cert-title');
+      const issuer = btn.getAttribute('data-cert-issuer');
+      const imgUrl = btn.getAttribute('data-cert-img');
+
+      openCertificateModal({ title, issuer, imgUrl });
+    });
+  });
+
+  // Clicking thumbnail directly on active card also opens preview
+  thumbContainers.forEach((container) => {
+    container.addEventListener('click', (e) => {
+      const card = container.closest('.cred-3d-card');
+      if (card && card.classList.contains('card-active')) {
+        const btn = card.querySelector('.btn-cred-view-cert');
+        if (btn) {
+          btn.click();
+        }
+      }
+    });
+  });
+
+  if (certClose) {
+    certClose.addEventListener('click', closeCertificateModal);
+  }
+
+  if (certOverlay) {
+    certOverlay.addEventListener('click', closeCertificateModal);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && certModal && certModal.classList.contains('open')) {
+      closeCertificateModal();
+    }
+  });
 });

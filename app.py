@@ -108,6 +108,12 @@ PORTFOLIO_DATA = {
     ],
     "internships": [
         {
+            "role": "AI-ML Virtual Internship",
+            "type": "Virtual Internship",
+            "description": "Completed 10-week intensive training program supported by Google for Developers and EduSkills, focusing on machine learning algorithms, computer vision, and practical AI implementations.",
+            "skills": ["Artificial Intelligence", "Machine Learning", "Python", "Data Analysis"]
+        },
+        {
             "role": "Java Full Stack Developer",
             "type": "Virtual Internship",
             "description": "Completed extensive training and project implementation in Java Full Stack Development, covering core & advanced Java, relational databases (SQL), API design, and modern web technologies.",
@@ -115,6 +121,11 @@ PORTFOLIO_DATA = {
         }
     ],
     "certifications": [
+        {
+            "title": "Centle Tri-City AI-Thon 2026",
+            "credential": "Certificate of Participation",
+            "focus": "Artificial Intelligence, Machine Learning, Innovation & Problem Solving"
+        },
         {
             "title": "DSA DeepTech Bootcamp",
             "credential": "Participation Certificate",
@@ -124,6 +135,76 @@ PORTFOLIO_DATA = {
             "title": "DevOps Fundamentals",
             "credential": "Infosys Springboard",
             "focus": "CI/CD Pipelines, Version Control, Infrastructure & Cloud Deployment Essentials"
+        }
+    ],
+    "credentials": [
+        {
+            "id": "aiml-internship",
+            "title": "AI-ML Virtual Internship",
+            "issuer": "Google for Developers & EduSkills",
+            "organization": "Supported By India Edu Program (AICTE & EduSkills)",
+            "badge_type": "Virtual Internship",
+            "date": "April – June 2025",
+            "credential_id": "b56d252f1ecee2cfac83808c4377415a",
+            "description": "Successfully completed 10-week intensive virtual internship in Artificial Intelligence and Machine Learning supported by Google for Developers, gaining practical skills in machine learning algorithms, model training, computer vision, and data engineering.",
+            "skills": ["Artificial Intelligence", "Machine Learning", "Python", "Data Analysis", "Computer Vision"],
+            "has_certificate": True,
+            "certificate_image": "images/aiml internship.jpeg",
+            "icon_type": "cpu"
+        },
+        {
+            "id": "java-fullstack-internship",
+            "title": "Java Full Stack Developer",
+            "issuer": "EduSkills & AICTE",
+            "organization": "Virtual Internship (National Internship Portal)",
+            "badge_type": "Virtual Internship",
+            "date": "Jan – Mar 2026",
+            "credential_id": "407fb62ef09050e50db4",
+            "description": "Completed extensive 10-week virtual internship covering core & advanced Java, relational databases (SQL), Spring Boot concepts, API design, and modern web technologies.",
+            "skills": ["Java", "Web Technologies", "SQL", "API Development"],
+            "has_certificate": True,
+            "certificate_image": "images/java full stack.jpeg",
+            "icon_type": "briefcase"
+        },
+        {
+            "id": "tri-city-aithon",
+            "title": "Centle Tri-City AI-Thon 2026",
+            "issuer": "Centle Group & KITSW",
+            "organization": "KITS Warangal (Dept. of CSE AI&ML)",
+            "badge_type": "Certificate of Participation",
+            "date": "2026",
+            "description": "Active participation in India's First Tri-City AI-Thon 2026 held at KITSW, Warangal, demonstrating enthusiasm, creativity, and technical innovation in AI solutions.",
+            "skills": ["Artificial Intelligence", "Machine Learning", "Innovation", "Problem-Solving"],
+            "has_certificate": True,
+            "certificate_image": "images/tri_city_aithon.jpeg",
+            "icon_type": "certificate"
+        },
+        {
+            "id": "dsa-deeptech-bootcamp",
+            "title": "DSA DeepTech Bootcamp",
+            "issuer": "Brainovision Solutions & AICTE",
+            "organization": "Kamala Institute of Technology & Science",
+            "badge_type": "Participation Certificate",
+            "date": "May 2026",
+            "credential_id": "DSA-BOV-KITS-010",
+            "description": "Intensive training program focusing on Data Structures & Algorithms, algorithmic analysis, problem-solving methodologies, and computational problem-solving for DeepTech applications.",
+            "skills": ["Data Structures", "Algorithms", "Problem-Solving", "Algorithmic Analysis"],
+            "has_certificate": True,
+            "certificate_image": "images/dsa.jpeg",
+            "icon_type": "certificate"
+        },
+        {
+            "id": "devops-fundamentals",
+            "title": "DevOps Fundamentals",
+            "issuer": "Infosys Springboard",
+            "organization": "Infosys Limited",
+            "badge_type": "Course Completion",
+            "date": "July 2025",
+            "description": "Comprehensive course covering CI/CD pipelines, version control workflows, automated infrastructure, and modern cloud deployment essentials.",
+            "skills": ["DevOps", "CI/CD Pipelines", "Cloud Deployment", "Version Control"],
+            "has_certificate": True,
+            "certificate_image": "images/devops.jpeg",
+            "icon_type": "cloud"
         }
     ],
     "highlights": [

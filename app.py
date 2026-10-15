@@ -74,7 +74,7 @@ PORTFOLIO_DATA = {
     "projects": [
         {
             "number": "01",
-            "title": "StellarStore",
+            "title": "Stellar Store",
             "category": "E-Commerce Web Application",
             "description": "An e-commerce web application for browsing and managing books and stationery products.",
             "tech_stack": ["Java", "Spring Boot", "MySQL", "HTML", "CSS", "JavaScript", "Cloudinary"],

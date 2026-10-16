@@ -110,7 +110,7 @@ PORTFOLIO_DATA = {
         {
             "role": "AI-ML Virtual Internship",
             "type": "Virtual Internship",
-            "description": "Completed 10-week intensive training program supported by Google for Developers and EduSkills, focusing on machine learning algorithms, computer vision, and practical AI implementations.",
+            "description": "Completed 10-week intensive training program supported by Google for Developers and EduSkills, focusing on machine learning algorithms, and practical AI implementations.",
             "skills": ["Artificial Intelligence", "Machine Learning", "Python", "Data Analysis"]
         },
         {
@@ -146,8 +146,8 @@ PORTFOLIO_DATA = {
             "badge_type": "Virtual Internship",
             "date": "April – June 2025",
             "credential_id": "b56d252f1ecee2cfac83808c4377415a",
-            "description": "Successfully completed 10-week intensive virtual internship in Artificial Intelligence and Machine Learning supported by Google for Developers, gaining practical skills in machine learning algorithms, model training, computer vision, and data engineering.",
-            "skills": ["Artificial Intelligence", "Machine Learning", "Python", "Data Analysis", "Computer Vision"],
+            "description": "Successfully completed 10-week intensive virtual internship in Artificial Intelligence and Machine Learning supported by Google for Developers, gaining practical skills in machine learning algorithms, model training, and data engineering.",
+            "skills": ["Artificial Intelligence", "Machine Learning", "Python", "Data Analysis"],
             "has_certificate": True,
             "certificate_image": "images/aiml internship.jpeg",
             "icon_type": "cpu"

@@ -1259,26 +1259,278 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 /* Project Card */
 .project-card {
   background: #0d1222;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 20px;
   padding: clamp(1.15rem, 2vw, 1.35rem);
   display: flex;
   flex-direction: column;
   position: relative;
-  box-shadow: 0 14px 34px -10px rgba(0, 0, 0, 0.7);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-color 0.35s ease, 
-              box-shadow 0.35s ease, 
-              background 0.35s ease;
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.65), 0 4px 12px -2px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease, 
+              background 0.4s ease,
+              opacity 0.45s ease;
   overflow: hidden;
   min-width: 0;
+  will-change: transform, box-shadow, opacity;
 }
 
-.project-card:hover {
-  transform: translateY(-7px);
-  background: #11182c;
-  border-color: rgba(168, 85, 247, 0.45);
-  box-shadow: 0 20px 42px -10px rgba(0, 0, 0, 0.8), 0 0 30px rgba(168, 85, 247, 0.2), 0 0 15px rgba(0, 210, 255, 0.15);
+/* Subtle top border accent line using theme gradient */
+.project-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(0, 210, 255, 0.35), rgba(168, 85, 247, 0.45), rgba(192, 38, 211, 0.35));
+  opacity: 0.4;
+  transition: opacity 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+  border-radius: 20px 20px 0 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Scroll Reveal Initial & Revealed State for Project Cards */
+.project-card.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.project-card.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered entrance animation for project cards on desktop/tablets */
+/* ==========================================================================
+   PROJECT CARDS: MOBILE VIEW (max-width: 767px)
+   ========================================================================== */
+@media (max-width: 767px) {
+  /* Non-centered cards have subtle resting contrast when a card is centered */
+  .projects-grid.has-active-card .project-card:not(.is-active-card) {
+    opacity: 0.8;
+    transform: translateY(0) scale(0.99);
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.6);
+  }
+
+  .projects-grid.has-active-card .project-card:not(.is-active-card)::before {
+    opacity: 0.2;
+  }
+
+  /* Centered active card highlight on mobile */
+  .project-card.is-active-card {
+    transform: translateY(-6px) scale(1.02) !important;
+    background: #11182c !important;
+    border-color: rgba(168, 85, 247, 0.65) !important;
+    box-shadow: 0 20px 42px -10px rgba(0, 0, 0, 0.85), 
+                0 0 24px rgba(168, 85, 247, 0.3), 
+                0 0 12px rgba(0, 210, 255, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+    z-index: 5 !important;
+    opacity: 1 !important;
+    transition-delay: 0s !important;
+  }
+
+  .project-card.is-active-card::before {
+    opacity: 1 !important;
+    background: linear-gradient(90deg, #00d2ff 0%, #a855f7 50%, #c026d3 100%) !important;
+    box-shadow: 0 0 14px rgba(168, 85, 247, 0.45) !important;
+  }
+
+  .project-card.is-active-card .project-num-badge {
+    background: linear-gradient(135deg, #9333ea, #6366f1) !important;
+    color: #ffffff !important;
+    border-color: #c084fc !important;
+    box-shadow: 0 0 14px rgba(168, 85, 247, 0.55) !important;
+  }
+
+  .project-card.is-active-card .project-img {
+    transform: scale(1.03) !important;
+  }
+
+  .project-card.is-active-card .project-title-link {
+    color: #c084fc !important;
+  }
+
+  /* Mobile Hover / Touch Priority:
+     Explicitly driven by .has-card-hover and .is-hovered (never sticky :hover) */
+  .projects-grid.has-card-hover .project-card.is-hovered {
+    transform: translateY(-8px) scale(1.025) !important;
+    background: #11182c !important;
+    border-color: rgba(168, 85, 247, 0.75) !important;
+    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.88), 
+                0 0 28px rgba(168, 85, 247, 0.35), 
+                0 0 16px rgba(0, 210, 255, 0.18),
+                inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+    z-index: 10 !important;
+    opacity: 1 !important;
+    transition-delay: 0s !important;
+  }
+
+  .projects-grid.has-card-hover .project-card.is-hovered::before {
+    opacity: 1 !important;
+    background: linear-gradient(90deg, #00d2ff 0%, #a855f7 50%, #c026d3 100%) !important;
+    box-shadow: 0 0 14px rgba(168, 85, 247, 0.5) !important;
+  }
+
+  .projects-grid.has-card-hover .project-card.is-hovered .project-num-badge {
+    background: linear-gradient(135deg, #9333ea, #6366f1) !important;
+    color: #ffffff !important;
+    border-color: #c084fc !important;
+    box-shadow: 0 0 16px rgba(168, 85, 247, 0.6) !important;
+  }
+
+  .projects-grid.has-card-hover .project-card.is-hovered .project-img {
+    transform: scale(1.05) !important;
+  }
+
+  .projects-grid.has-card-hover .project-card.is-hovered .project-title-link {
+    color: #c084fc !important;
+  }
+
+  /* When a card is hovered on mobile, all non-hovered cards (even .is-active-card) are dimmed */
+  .projects-grid.has-card-hover .project-card:not(.is-hovered) {
+    background: #0d1222 !important;
+    border-color: rgba(255, 255, 255, 0.07) !important;
+    box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.65) !important;
+    transform: translateY(0) scale(0.99) !important;
+    opacity: 0.76 !important;
+    z-index: 1 !important;
+  }
+
+  .projects-grid.has-card-hover .project-card:not(.is-hovered)::before {
+    opacity: 0.15 !important;
+    box-shadow: none !important;
+  }
+
+  .projects-grid.has-card-hover .project-card:not(.is-hovered) .project-num-badge {
+    background: rgba(8, 11, 20, 0.9) !important;
+    color: #c084fc !important;
+    border-color: rgba(168, 85, 247, 0.4) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  .projects-grid.has-card-hover .project-card:not(.is-hovered) .project-img {
+    transform: scale(1) !important;
+  }
+
+  .projects-grid.has-card-hover .project-card:not(.is-hovered) .project-title-link {
+    color: inherit !important;
+  }
+}
+
+/* ==========================================================================
+   PROJECT CARDS: DESKTOP / LAPTOP VIEW (min-width: 768px)
+   ========================================================================== */
+@media (min-width: 768px) {
+  .projects-grid .project-card:nth-child(1) { transition-delay: 0.06s; }
+  .projects-grid .project-card:nth-child(2) { transition-delay: 0.16s; }
+  .projects-grid .project-card:nth-child(3) { transition-delay: 0.26s; }
+
+  /* Desktop and Laptop View: Highlight all visible project cards together while section is in view */
+  .projects-grid.is-in-view .project-card {
+    background: #0f1527;
+    border-color: rgba(168, 85, 247, 0.45);
+    box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.75), 
+                0 0 24px rgba(168, 85, 247, 0.25), 
+                0 0 12px rgba(0, 210, 255, 0.14),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+
+  .projects-grid.is-in-view .project-card::before {
+    opacity: 0.8;
+    background: linear-gradient(90deg, rgba(0, 210, 255, 0.6) 0%, rgba(168, 85, 247, 0.8) 50%, rgba(192, 38, 211, 0.6) 100%);
+    box-shadow: 0 0 12px rgba(168, 85, 247, 0.35);
+  }
+
+  /* Desktop Individual Card Hover Priority */
+  .project-card:hover,
+  .project-card.is-hovered {
+    transform: translateY(-8px) scale(1.025) !important;
+    background: #11182c !important;
+    border-color: rgba(168, 85, 247, 0.75) !important;
+    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.88), 
+                0 0 28px rgba(168, 85, 247, 0.35), 
+                0 0 16px rgba(0, 210, 255, 0.18),
+                inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+    z-index: 10 !important;
+    opacity: 1 !important;
+    transition-delay: 0s !important;
+  }
+
+  .project-card:hover::before,
+  .project-card.is-hovered::before {
+    opacity: 1 !important;
+    background: linear-gradient(90deg, #00d2ff 0%, #a855f7 50%, #c026d3 100%) !important;
+    box-shadow: 0 0 14px rgba(168, 85, 247, 0.5) !important;
+  }
+
+  .project-card:hover .project-num-badge,
+  .project-card.is-hovered .project-num-badge {
+    background: linear-gradient(135deg, #9333ea, #6366f1) !important;
+    color: #ffffff !important;
+    border-color: #c084fc !important;
+    box-shadow: 0 0 16px rgba(168, 85, 247, 0.6) !important;
+  }
+
+  .project-card:hover .project-img,
+  .project-card.is-hovered .project-img {
+    transform: scale(1.05) !important;
+  }
+
+  .project-card:hover .project-title-link,
+  .project-card.is-hovered .project-title-link {
+    color: #c084fc !important;
+  }
+
+  /* Desktop: Non-hovered sibling cards dim down */
+  .projects-grid:has(.project-card:hover) .project-card:not(:hover),
+  .projects-grid:has(.project-card.is-hovered) .project-card:not(.is-hovered),
+  .projects-grid.has-card-hover .project-card:not(:hover):not(.is-hovered) {
+    background: #0d1222 !important;
+    border-color: rgba(255, 255, 255, 0.07) !important;
+    box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.65) !important;
+    transform: translateY(0) scale(0.99) !important;
+    opacity: 0.76 !important;
+    z-index: 1 !important;
+  }
+
+  .projects-grid:has(.project-card:hover) .project-card:not(:hover)::before,
+  .projects-grid:has(.project-card.is-hovered) .project-card:not(.is-hovered)::before,
+  .projects-grid.has-card-hover .project-card:not(:hover)::before,
+  .projects-grid.has-card-hover .project-card:not(.is-hovered)::before {
+    opacity: 0.15 !important;
+    box-shadow: none !important;
+  }
+
+  .projects-grid:has(.project-card:hover) .project-card:not(:hover) .project-num-badge,
+  .projects-grid:has(.project-card.is-hovered) .project-card:not(.is-hovered) .project-num-badge,
+  .projects-grid.has-card-hover .project-card:not(:hover) .project-num-badge,
+  .projects-grid.has-card-hover .project-card:not(.is-hovered) .project-num-badge {
+    background: rgba(8, 11, 20, 0.9) !important;
+    color: #c084fc !important;
+    border-color: rgba(168, 85, 247, 0.4) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  .projects-grid:has(.project-card:hover) .project-card:not(:hover) .project-img,
+  .projects-grid:has(.project-card.is-hovered) .project-card:not(.is-hovered) .project-img,
+  .projects-grid.has-card-hover .project-card:not(:hover) .project-img,
+  .projects-grid.has-card-hover .project-card:not(.is-hovered) .project-img {
+    transform: scale(1) !important;
+  }
+
+  .projects-grid:has(.project-card:hover) .project-card:not(:hover) .project-title-link,
+  .projects-grid:has(.project-card.is-hovered) .project-card:not(.is-hovered) .project-title-link,
+  .projects-grid.has-card-hover .project-card:not(:hover) .project-title-link,
+  .projects-grid.has-card-hover .project-card:not(.is-hovered) .project-title-link {
+    color: inherit !important;
+  }
 }
 
 /* Numbered Label 01, 02, 03 at top-left */
@@ -3169,6 +3421,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     grid-template-columns: 1fr;
   }
 
+  .projects-grid .project-card {
+    transition-delay: 0.04s;
+  }
+
   .about-metrics-row {
     grid-template-columns: 1fr;
   }
@@ -3348,10 +3604,24 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     transform: none !important;
   }
 
+  .project-card,
+  .project-card.reveal-on-scroll,
+  .project-card.is-active-card,
   .project-card:hover,
+  .project-card.is-hovered,
+  .project-card.is-revealed:hover,
+  .projects-grid.has-active-card .project-card,
+  .project-card::before,
+  .project-card.is-active-card::before,
+  .project-card:hover::before,
+  .project-card.is-hovered::before,
   .project-img,
-  .project-card:hover .project-img {
+  .project-card.is-active-card .project-img,
+  .project-card:hover .project-img,
+  .project-card.is-hovered .project-img {
     transform: none !important;
     transition: none !important;
+    opacity: 1 !important;
+    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.65) !important;
   }
 }

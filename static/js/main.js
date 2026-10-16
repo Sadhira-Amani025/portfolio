@@ -56,6 +56,12 @@ document.addEventListener('DOMContentLoaded', () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-revealed');
+          // If project-card, clear entrance transition-delay after reveal animation finishes
+          if (entry.target.classList.contains('project-card')) {
+            setTimeout(() => {
+              entry.target.style.transitionDelay = '0s';
+            }, 800);
+          }
           // Only animate once when entering viewport
           observer.unobserve(entry.target);
         }
@@ -67,6 +73,202 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     revealElements.forEach(el => revealObserver.observe(el));
+  }
+
+  // 3b. Automatic Scroll-Based Project Card Highlighting & View Management
+  const projectsSection = document.getElementById('projects');
+  const projectsGrid = document.querySelector('.projects-grid');
+  const projectCards = Array.from(document.querySelectorAll('.projects-grid .project-card'));
+
+  if (projectsSection && projectsGrid && projectCards.length > 0 && !prefersReducedMotion) {
+    let activeCardIndex = -1;  // Tracks the project card closest to viewport center
+    let hoveredCardIndex = -1; // Tracks any temporarily hovered/touched card
+    let isProjectsVisible = false;
+    let isTicking = false;
+    let isScrolling = false;
+    let scrollEndTimer = null;
+
+    // Apply visual classes based on activeCardIndex and hoveredCardIndex
+    const applyCardStates = () => {
+      const isMobileView = window.matchMedia('(max-width: 767px)').matches;
+
+      if (isMobileView) {
+        // Clear desktop section-wide highlight
+        projectsGrid.classList.remove('is-in-view');
+
+        // 1. Temporary hover priority (only if not actively scrolling)
+        if (hoveredCardIndex !== -1 && !isScrolling) {
+          projectsGrid.classList.add('has-card-hover');
+          projectCards.forEach((card, idx) => {
+            card.classList.toggle('is-hovered', idx === hoveredCardIndex);
+          });
+        } else {
+          projectsGrid.classList.remove('has-card-hover');
+          projectCards.forEach(card => card.classList.remove('is-hovered'));
+        }
+
+        // 2. Continuous scroll-centered highlight
+        if (activeCardIndex !== -1) {
+          projectsGrid.classList.add('has-active-card');
+          projectCards.forEach((card, idx) => {
+            card.classList.toggle('is-active-card', idx === activeCardIndex);
+          });
+        } else {
+          projectsGrid.classList.remove('has-active-card');
+          projectCards.forEach(card => card.classList.remove('is-active-card'));
+        }
+      } else {
+        // Laptop & Desktop View (>= 768px):
+        projectsGrid.classList.remove('has-active-card');
+        projectCards.forEach(card => card.classList.remove('is-active-card'));
+
+        if (hoveredCardIndex !== -1) {
+          projectsGrid.classList.add('has-card-hover');
+          projectCards.forEach((card, idx) => {
+            card.classList.toggle('is-hovered', idx === hoveredCardIndex);
+          });
+        } else {
+          projectsGrid.classList.remove('has-card-hover');
+          projectCards.forEach(card => card.classList.remove('is-hovered'));
+        }
+
+        if (isProjectsVisible) {
+          projectsGrid.classList.add('is-in-view');
+        } else {
+          projectsGrid.classList.remove('is-in-view');
+        }
+      }
+    };
+
+    // Calculate which card is closest to the visible viewport center on mobile
+    const updateCenteredCard = () => {
+      isTicking = false;
+
+      const isMobileView = window.matchMedia('(max-width: 767px)').matches;
+      const secRect = projectsSection.getBoundingClientRect();
+      const isSectionInWindow = secRect.top < window.innerHeight && secRect.bottom > 0;
+
+      if (!isSectionInWindow) {
+        activeCardIndex = -1;
+        applyCardStates();
+        return;
+      }
+
+      if (isMobileView) {
+        const viewportHeight = window.innerHeight;
+        const viewportCenter = viewportHeight * 0.5;
+
+        let minDistance = Infinity;
+        let targetIndex = -1;
+        const maxAllowedDist = viewportHeight * 0.45;
+
+        projectCards.forEach((card, idx) => {
+          const rect = card.getBoundingClientRect();
+          const cardCenter = rect.top + rect.height * 0.5;
+          const dist = Math.abs(cardCenter - viewportCenter);
+
+          // Card must be visible and within focal center area
+          if (rect.bottom > 30 && rect.top < viewportHeight - 30) {
+            if (dist < minDistance && dist <= maxAllowedDist) {
+              minDistance = dist;
+              targetIndex = idx;
+            }
+          }
+        });
+
+        activeCardIndex = targetIndex;
+      } else {
+        activeCardIndex = -1;
+      }
+
+      applyCardStates();
+    };
+
+    const requestCardUpdate = () => {
+      if (!isTicking) {
+        requestAnimationFrame(updateCenteredCard);
+        isTicking = true;
+      }
+    };
+
+    // Card Hover & Touch Event Handlers
+    projectCards.forEach((card, idx) => {
+      const startHover = () => {
+        if (!isScrolling) {
+          hoveredCardIndex = idx;
+          applyCardStates();
+        }
+      };
+
+      const endHover = () => {
+        if (hoveredCardIndex === idx) {
+          hoveredCardIndex = -1;
+          applyCardStates();
+        }
+      };
+
+      card.addEventListener('pointerenter', startHover);
+      card.addEventListener('pointerleave', endHover);
+      card.addEventListener('mouseenter', startHover);
+      card.addEventListener('mouseleave', endHover);
+
+      // On mobile touch: tap to temporarily highlight
+      card.addEventListener('touchstart', () => {
+        startHover();
+      }, { passive: true });
+    });
+
+    // Clear hover when tapping anywhere outside project cards
+    document.addEventListener('touchstart', (e) => {
+      if (!e.target.closest('.project-card')) {
+        hoveredCardIndex = -1;
+        applyCardStates();
+      }
+    }, { passive: true });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.project-card')) {
+        hoveredCardIndex = -1;
+        applyCardStates();
+      }
+    });
+
+    // Scroll & Touchmove Handler:
+    // Any scroll or finger movement IMMEDIATELY cancels hover and recalculates the centered card
+    const handleScrollOrMove = () => {
+      isScrolling = true;
+      hoveredCardIndex = -1; // Clear any hover/touch lock immediately
+
+      clearTimeout(scrollEndTimer);
+      scrollEndTimer = setTimeout(() => {
+        isScrolling = false;
+        applyCardStates();
+      }, 150);
+
+      requestCardUpdate();
+    };
+
+    // IntersectionObserver to observe projects section
+    if ('IntersectionObserver' in window) {
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          isProjectsVisible = entry.isIntersecting;
+          requestCardUpdate();
+        });
+      }, {
+        root: null,
+        threshold: [0, 0.05, 0.1, 0.2, 0.5, 0.8, 1.0],
+        rootMargin: '100px 0px 100px 0px'
+      });
+      sectionObserver.observe(projectsSection);
+    } else {
+      isProjectsVisible = true;
+    }
+
+    window.addEventListener('scroll', handleScrollOrMove, { passive: true });
+    window.addEventListener('touchmove', handleScrollOrMove, { passive: true });
+    window.addEventListener('resize', requestCardUpdate, { passive: true });
+    requestCardUpdate();
   }
 
   // 4. Header Scroll Effect & Scrollspy

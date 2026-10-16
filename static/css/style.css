@@ -2034,7 +2034,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(155deg, rgba(15, 21, 38, 0.94) 0%, rgba(9, 13, 24, 0.98) 100%);
+  background: linear-gradient(155deg, #10162a 0%, #090d1a 100%);
   border: 1px solid rgba(0, 210, 255, 0.2);
   border-radius: 22px;
   padding: clamp(1.25rem, 2.5vw, 1.75rem);
@@ -2097,6 +2097,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   font-weight: 700;
   letter-spacing: 0.03em;
   text-transform: uppercase;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .cred-badge-pill svg {
@@ -2287,7 +2289,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.6rem;
   margin-bottom: 0.45rem;
 }
 
@@ -2296,6 +2299,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   align-items: center;
   gap: 0.45rem;
   min-width: 0;
+  max-width: 100%;
 }
 
 .cred-issuer-svg {
@@ -2323,6 +2327,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   padding: 0.15rem 0.5rem;
   border-radius: 4px;
   white-space: nowrap;
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
 }
 
 .cred-card-title {
@@ -2746,73 +2754,141 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 @media (max-width: 768px) {
+  .cred-carousel-outer {
+    padding-bottom: 0.5rem;
+  }
+
   .cred-carousel-stage {
-    height: clamp(540px, 72vh, 600px);
+    height: 640px;
+    margin-bottom: 1.25rem;
   }
 
   .cred-3d-card {
-    width: min(440px, 86vw);
-    min-height: 480px;
+    width: min(440px, 92vw);
+    min-height: auto;
+    max-width: 440px;
+  }
+
+  /* Cleanly hide neighbor cards on mobile so they do not overlap or look mixed up */
+  .cred-3d-card.card-prev,
+  .cred-3d-card.card-next {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    filter: none !important;
   }
 
   .cred-3d-card.card-prev {
-    transform: translate3d(-54%, 0, -100px) scale(0.82) rotateY(12deg);
-    opacity: 0.45;
+    transform: translate3d(-100%, 0, -40px) scale(0.85) !important;
   }
 
   .cred-3d-card.card-next {
-    transform: translate3d(54%, 0, -100px) scale(0.82) rotateY(-12deg);
-    opacity: 0.45;
+    transform: translate3d(100%, 0, -40px) scale(0.85) !important;
   }
 
+  .cred-3d-card.card-active {
+    transform: translate3d(0, 0, 0) scale(1) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    z-index: 10;
+  }
+
+  /* Move arrow navigation buttons down to the bottom controls row so they never block card content */
   .cred-arrow-btn {
+    top: auto;
+    bottom: 0;
+    transform: none;
     width: 42px;
     height: 42px;
+    z-index: 25;
   }
 
   .cred-arrow-prev {
-    left: 4px;
+    left: 14px;
   }
 
   .cred-arrow-next {
-    right: 4px;
+    right: 14px;
+  }
+
+  .cred-arrow-btn:hover {
+    transform: scale(1.08);
+  }
+
+  .cred-arrow-btn:active {
+    transform: scale(0.94);
+  }
+
+  .cred-carousel-bottom {
+    margin-top: 1rem;
+    padding: 0 58px;
+    min-height: 42px;
+    gap: 1rem;
   }
 }
 
 @media (max-width: 480px) {
   .cred-carousel-stage {
-    height: 560px;
+    height: 615px;
+    margin-bottom: 1rem;
   }
 
   .cred-3d-card {
-    width: calc(100% - 44px);
+    width: 100%;
     max-width: 360px;
-    min-height: 480px;
-  }
-
-  .cred-3d-card.card-prev {
-    transform: translate3d(-68%, 0, -80px) scale(0.8) rotateY(10deg);
-    opacity: 0.35;
-  }
-
-  .cred-3d-card.card-next {
-    transform: translate3d(68%, 0, -80px) scale(0.8) rotateY(-10deg);
-    opacity: 0.35;
+    min-height: auto;
   }
 
   .cred-card-inner {
-    padding: 1.15rem;
+    padding: 1.15rem 1.05rem;
+    border-radius: 18px;
+  }
+
+  .cred-card-topbar {
+    margin-bottom: 0.85rem;
   }
 
   .cred-card-visual {
-    height: 120px;
+    height: 115px;
+    margin-bottom: 0.85rem;
   }
 
   .cred-card-title {
-    font-size: 1.1rem;
+    font-size: 1.12rem;
+    margin-bottom: 0.45rem;
   }
 
   .cred-card-desc {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    margin-bottom: 0.85rem;
+  }
+
+  .cred-skills-block {
+    margin-bottom: 0.85rem;
+  }
+
+  .cred-skills-label {
+    font-size: 0.68rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .cred-skills-row {
+    gap: 0.35rem;
+  }
+
+  .cred-skill-pill {
+    font-size: 0.71rem;
+    padding: 0.18rem 0.55rem;
+  }
+
+  .cred-card-actions {
+    padding-top: 0.85rem;
+  }
+
+  .btn-cred-view-cert {
+    padding: 0.55rem 1.15rem;
     font-size: 0.82rem;
   }
 
@@ -2824,6 +2900,25 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .cred-arrow-btn svg {
     width: 18px;
     height: 18px;
+  }
+
+  .cred-arrow-prev {
+    left: 8px;
+  }
+
+  .cred-arrow-next {
+    right: 8px;
+  }
+
+  .cred-carousel-bottom {
+    padding: 0 48px;
+    gap: 0.75rem;
+    min-height: 38px;
+  }
+
+  .cred-index-indicator {
+    font-size: 0.82rem;
+    padding: 0.2rem 0.55rem;
   }
 }
 

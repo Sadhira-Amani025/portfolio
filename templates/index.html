@@ -430,6 +430,18 @@
 
               <p class="project-desc">{{ project.description }}</p>
 
+              <!-- Technologies Used -->
+              {% if project.tech_stack %}
+              <div class="project-tech-section">
+                <span class="project-tech-heading">Technologies Used</span>
+                <div class="project-tech-badges" role="list" aria-label="Technologies used in {{ project.title }}">
+                  {% for tech in project.tech_stack %}
+                  <span class="project-tech-pill" role="listitem">{{ tech }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+              {% endif %}
+
               <!-- Action Links (Live Demo & GitHub Repo) -->
               <div class="project-footer">
                 {% if project.live_url %}

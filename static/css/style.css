@@ -1320,7 +1320,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     opacity: 0.2;
   }
 
-  /* Centered active card highlight on mobile */
+  /* Centered active card highlight on mobile (scroll-based focal state) */
   .project-card.is-active-card {
     transform: translateY(-6px) scale(1.02) !important;
     background: #11182c !important;
@@ -1355,70 +1355,37 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     color: #c084fc !important;
   }
 
-  /* Mobile Hover / Touch Priority:
-     Explicitly driven by .has-card-hover and .is-hovered (never sticky :hover) */
-  .projects-grid.has-card-hover .project-card.is-hovered {
-    transform: translateY(-8px) scale(1.025) !important;
-    background: #11182c !important;
-    border-color: rgba(168, 85, 247, 0.75) !important;
-    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.88), 
-                0 0 28px rgba(168, 85, 247, 0.35), 
-                0 0 16px rgba(0, 210, 255, 0.18),
-                inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
-    z-index: 10 !important;
-    opacity: 1 !important;
-    transition-delay: 0s !important;
-  }
-
-  .projects-grid.has-card-hover .project-card.is-hovered::before {
-    opacity: 1 !important;
-    background: linear-gradient(90deg, #00d2ff 0%, #a855f7 50%, #c026d3 100%) !important;
-    box-shadow: 0 0 14px rgba(168, 85, 247, 0.5) !important;
-  }
-
-  .projects-grid.has-card-hover .project-card.is-hovered .project-num-badge {
-    background: linear-gradient(135deg, #9333ea, #6366f1) !important;
-    color: #ffffff !important;
-    border-color: #c084fc !important;
-    box-shadow: 0 0 16px rgba(168, 85, 247, 0.6) !important;
-  }
-
-  .projects-grid.has-card-hover .project-card.is-hovered .project-img {
-    transform: scale(1.05) !important;
-  }
-
-  .projects-grid.has-card-hover .project-card.is-hovered .project-title-link {
-    color: #c084fc !important;
-  }
-
-  /* When a card is hovered on mobile, all non-hovered cards (even .is-active-card) are dimmed */
-  .projects-grid.has-card-hover .project-card:not(.is-hovered) {
-    background: #0d1222 !important;
-    border-color: rgba(255, 255, 255, 0.07) !important;
-    box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.65) !important;
+  /* Mobile: Eliminate hover effect on project cards */
+  .project-card:not(.is-active-card):hover {
     transform: translateY(0) scale(0.99) !important;
-    opacity: 0.76 !important;
-    z-index: 1 !important;
+    background: #0d1222 !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
+    box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.6) !important;
   }
 
-  .projects-grid.has-card-hover .project-card:not(.is-hovered)::before {
-    opacity: 0.15 !important;
+  .project-card:not(.is-active-card):hover::before {
+    opacity: 0.2 !important;
+    background: linear-gradient(90deg, rgba(0, 210, 255, 0.35), rgba(168, 85, 247, 0.45), rgba(192, 38, 211, 0.35)) !important;
     box-shadow: none !important;
   }
 
-  .projects-grid.has-card-hover .project-card:not(.is-hovered) .project-num-badge {
+  .project-card:not(.is-active-card):hover .project-img {
+    transform: none !important;
+  }
+
+  .project-card:not(.is-active-card):hover .project-num-badge {
     background: rgba(8, 11, 20, 0.9) !important;
     color: #c084fc !important;
     border-color: rgba(168, 85, 247, 0.4) !important;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6) !important;
   }
 
-  .projects-grid.has-card-hover .project-card:not(.is-hovered) .project-img {
-    transform: scale(1) !important;
+  .project-card:not(.is-active-card):hover .project-title-link {
+    color: inherit !important;
   }
 
-  .projects-grid.has-card-hover .project-card:not(.is-hovered) .project-title-link {
-    color: inherit !important;
+  .project-card:not(.is-active-card):hover .project-image-overlay {
+    opacity: 0 !important;
   }
 }
 
@@ -1430,7 +1397,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .projects-grid .project-card:nth-child(2) { transition-delay: 0.16s; }
   .projects-grid .project-card:nth-child(3) { transition-delay: 0.26s; }
 
-  /* Desktop and Laptop View: Highlight all visible project cards together while section is in view */
+  /* Desktop and Laptop View: Highlight all visible project cards together while section is in view (Scrolling Effect) */
   .projects-grid.is-in-view .project-card {
     background: #0f1527;
     border-color: rgba(168, 85, 247, 0.45);
@@ -1448,9 +1415,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     box-shadow: 0 0 12px rgba(168, 85, 247, 0.35);
   }
 
-  /* Desktop Individual Card Hover Priority */
-  .project-card:hover,
-  .project-card.is-hovered {
+  /* When scrolling up/down on desktop, suppress pointer events so native :hover drops and scrolling effect resumes instantly */
+  .projects-grid.is-scrolling .project-card {
+    pointer-events: none !important;
+  }
+
+  /* Desktop Individual Card Hover Priority (controlled cleanly via .has-card-hover and .is-hovered) */
+  .projects-grid.has-card-hover:not(.is-scrolling) .project-card.is-hovered {
     transform: translateY(-8px) scale(1.025) !important;
     background: #11182c !important;
     border-color: rgba(168, 85, 247, 0.75) !important;
@@ -1463,35 +1434,29 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     transition-delay: 0s !important;
   }
 
-  .project-card:hover::before,
-  .project-card.is-hovered::before {
+  .projects-grid.has-card-hover:not(.is-scrolling) .project-card.is-hovered::before {
     opacity: 1 !important;
     background: linear-gradient(90deg, #00d2ff 0%, #a855f7 50%, #c026d3 100%) !important;
     box-shadow: 0 0 14px rgba(168, 85, 247, 0.5) !important;
   }
 
-  .project-card:hover .project-num-badge,
-  .project-card.is-hovered .project-num-badge {
+  .projects-grid.has-card-hover:not(.is-scrolling) .project-card.is-hovered .project-num-badge {
     background: linear-gradient(135deg, #9333ea, #6366f1) !important;
     color: #ffffff !important;
     border-color: #c084fc !important;
     box-shadow: 0 0 16px rgba(168, 85, 247, 0.6) !important;
   }
 
-  .project-card:hover .project-img,
-  .project-card.is-hovered .project-img {
+  .projects-grid.has-card-hover:not(.is-scrolling) .project-card.is-hovered .project-img {
     transform: scale(1.05) !important;
   }
 
-  .project-card:hover .project-title-link,
-  .project-card.is-hovered .project-title-link {
+  .projects-grid.has-card-hover:not(.is-scrolling) .project-card.is-hovered .project-title-link {
     color: #c084fc !important;
   }
 
-  /* Desktop: Non-hovered sibling cards dim down */
-  .projects-grid:has(.project-card:hover) .project-card:not(:hover),
-  .projects-grid:has(.project-card.is-hovered) .project-card:not(.is-hovered),
-  .projects-grid.has-card-hover .project-card:not(:hover):not(.is-hovered) {
+  /* Desktop: Non-hovered sibling cards dim down only while a card is actively hovered */
+  .projects-grid.has-card-hover:not(.is-scrolling) .project-card:not(.is-hovered) {
     background: #0d1222 !important;
     border-color: rgba(255, 255, 255, 0.07) !important;
     box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.65) !important;
@@ -1500,35 +1465,23 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     z-index: 1 !important;
   }
 
-  .projects-grid:has(.project-card:hover) .project-card:not(:hover)::before,
-  .projects-grid:has(.project-card.is-hovered) .project-card:not(.is-hovered)::before,
-  .projects-grid.has-card-hover .project-card:not(:hover)::before,
-  .projects-grid.has-card-hover .project-card:not(.is-hovered)::before {
+  .projects-grid.has-card-hover:not(.is-scrolling) .project-card:not(.is-hovered)::before {
     opacity: 0.15 !important;
     box-shadow: none !important;
   }
 
-  .projects-grid:has(.project-card:hover) .project-card:not(:hover) .project-num-badge,
-  .projects-grid:has(.project-card.is-hovered) .project-card:not(.is-hovered) .project-num-badge,
-  .projects-grid.has-card-hover .project-card:not(:hover) .project-num-badge,
-  .projects-grid.has-card-hover .project-card:not(.is-hovered) .project-num-badge {
+  .projects-grid.has-card-hover:not(.is-scrolling) .project-card:not(.is-hovered) .project-num-badge {
     background: rgba(8, 11, 20, 0.9) !important;
     color: #c084fc !important;
     border-color: rgba(168, 85, 247, 0.4) !important;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6) !important;
   }
 
-  .projects-grid:has(.project-card:hover) .project-card:not(:hover) .project-img,
-  .projects-grid:has(.project-card.is-hovered) .project-card:not(.is-hovered) .project-img,
-  .projects-grid.has-card-hover .project-card:not(:hover) .project-img,
-  .projects-grid.has-card-hover .project-card:not(.is-hovered) .project-img {
+  .projects-grid.has-card-hover:not(.is-scrolling) .project-card:not(.is-hovered) .project-img {
     transform: scale(1) !important;
   }
 
-  .projects-grid:has(.project-card:hover) .project-card:not(:hover) .project-title-link,
-  .projects-grid:has(.project-card.is-hovered) .project-card:not(.is-hovered) .project-title-link,
-  .projects-grid.has-card-hover .project-card:not(:hover) .project-title-link,
-  .projects-grid.has-card-hover .project-card:not(.is-hovered) .project-title-link {
+  .projects-grid.has-card-hover:not(.is-scrolling) .project-card:not(.is-hovered) .project-title-link {
     color: inherit !important;
   }
 }
@@ -1558,11 +1511,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   transition: all var(--transition-fast);
 }
 
-.project-card:hover .project-num-badge {
-  background: linear-gradient(135deg, #9333ea, #6366f1);
-  color: #ffffff;
-  border-color: #c084fc;
-  box-shadow: 0 0 16px rgba(168, 85, 247, 0.6);
+@media (hover: hover) and (min-width: 768px) {
+  .projects-grid.has-card-hover:not(.is-scrolling) .project-card.is-hovered .project-num-badge {
+    background: linear-gradient(135deg, #9333ea, #6366f1);
+    color: #ffffff;
+    border-color: #c084fc;
+    box-shadow: 0 0 16px rgba(168, 85, 247, 0.6);
+  }
 }
 
 /* Large Screenshot Container */
@@ -1595,8 +1550,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
 }
 
-.project-card:hover .project-img {
-  transform: scale(1.05);
+@media (hover: hover) and (min-width: 768px) {
+  .projects-grid.has-card-hover:not(.is-scrolling) .project-card.is-hovered .project-img {
+    transform: scale(1.05);
+  }
 }
 
 .project-image-overlay {
@@ -1610,8 +1567,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   transition: opacity var(--transition-normal);
 }
 
-.project-card:hover .project-image-overlay {
-  opacity: 1;
+@media (hover: hover) and (min-width: 768px) {
+  .projects-grid.has-card-hover:not(.is-scrolling) .project-card.is-hovered .project-image-overlay {
+    opacity: 1;
+  }
 }
 
 .project-overlay-badge {
@@ -1632,8 +1591,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   transition: transform var(--transition-normal);
 }
 
-.project-card:hover .project-overlay-badge {
-  transform: translateY(0);
+@media (hover: hover) and (min-width: 768px) {
+  .projects-grid.has-card-hover:not(.is-scrolling) .project-card.is-hovered .project-overlay-badge {
+    transform: translateY(0);
+  }
 }
 
 .project-overlay-badge svg {
@@ -1681,10 +1642,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   transition: color var(--transition-fast);
 }
 
-.project-card:hover .project-title-link {
-  color: #c084fc;
+@media (hover: hover) and (min-width: 768px) {
+  .projects-grid.has-card-hover:not(.is-scrolling) .project-card.is-hovered .project-title-link {
+    color: #c084fc;
+  }
 }
-
 
 .project-desc {
   color: var(--text-secondary);
@@ -1753,8 +1715,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.project-card:hover .project-tech-pill {
-  border-color: rgba(255, 255, 255, 0.14);
+@media (hover: hover) and (min-width: 768px) {
+  .projects-grid.has-card-hover:not(.is-scrolling) .project-card.is-hovered .project-tech-pill {
+    border-color: rgba(255, 255, 255, 0.14);
+  }
 }
 
 .project-tech-pill:hover {

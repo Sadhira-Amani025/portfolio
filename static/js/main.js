@@ -81,33 +81,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const projectCards = Array.from(document.querySelectorAll('.projects-grid .project-card'));
 
   if (projectsSection && projectsGrid && projectCards.length > 0 && !prefersReducedMotion) {
-    let activeCardIndex = -1;  // Tracks the project card closest to viewport center
-    let hoveredCardIndex = -1; // Tracks any temporarily hovered/touched card
+    let activeCardIndex = -1;  // Tracks the project card closest to viewport center on mobile
+    let hoveredCardIndex = -1; // Tracks any temporarily hovered card on desktop
     let isProjectsVisible = false;
     let isTicking = false;
     let isScrolling = false;
     let scrollEndTimer = null;
+    let lastMouseX = -1;
+    let lastMouseY = -1;
 
     // Apply visual classes based on activeCardIndex and hoveredCardIndex
     const applyCardStates = () => {
       const isMobileView = window.matchMedia('(max-width: 767px)').matches;
 
       if (isMobileView) {
-        // Clear desktop section-wide highlight
+        // Mobile view: completely eliminate hover effects; driven purely by scroll-centering
         projectsGrid.classList.remove('is-in-view');
+        projectsGrid.classList.remove('has-card-hover');
+        projectCards.forEach(card => card.classList.remove('is-hovered'));
 
-        // 1. Temporary hover priority (only if not actively scrolling)
-        if (hoveredCardIndex !== -1 && !isScrolling) {
-          projectsGrid.classList.add('has-card-hover');
-          projectCards.forEach((card, idx) => {
-            card.classList.toggle('is-hovered', idx === hoveredCardIndex);
-          });
-        } else {
-          projectsGrid.classList.remove('has-card-hover');
-          projectCards.forEach(card => card.classList.remove('is-hovered'));
-        }
-
-        // 2. Continuous scroll-centered highlight
+        // Continuous scroll-centered highlight on mobile
         if (activeCardIndex !== -1) {
           projectsGrid.classList.add('has-active-card');
           projectCards.forEach((card, idx) => {
@@ -122,7 +115,8 @@ document.addEventListener('DOMContentLoaded', () => {
         projectsGrid.classList.remove('has-active-card');
         projectCards.forEach(card => card.classList.remove('is-active-card'));
 
-        if (hoveredCardIndex !== -1) {
+        // Desktop hover priority: only if not actively scrolling and a card is actively hovered
+        if (hoveredCardIndex !== -1 && !isScrolling) {
           projectsGrid.classList.add('has-card-hover');
           projectCards.forEach((card, idx) => {
             card.classList.toggle('is-hovered', idx === hoveredCardIndex);
@@ -132,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
           projectCards.forEach(card => card.classList.remove('is-hovered'));
         }
 
+        // Desktop scrolling effect: highlight all cards in-view together
         if (isProjectsVisible) {
           projectsGrid.classList.add('is-in-view');
         } else {
@@ -191,40 +186,53 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    // Card Hover & Touch Event Handlers
+    // Card Hover Handlers (Desktop Only: Mobile has NO hover effect)
     projectCards.forEach((card, idx) => {
-      const startHover = () => {
-        if (!isScrolling) {
-          hoveredCardIndex = idx;
-          applyCardStates();
+      const handlePointerEnterOrMove = (e) => {
+        // Disallow on mobile
+        if (window.matchMedia('(max-width: 767px)').matches) return;
+        // Ignore while actively scrolling
+        if (isScrolling) return;
+
+        // Verify genuine mouse movement to avoid re-triggering hover when scroll stops under a stationary cursor
+        if (e.clientX !== undefined && e.clientY !== undefined) {
+          if (e.clientX === lastMouseX && e.clientY === lastMouseY && hoveredCardIndex === -1) {
+            return;
+          }
+          lastMouseX = e.clientX;
+          lastMouseY = e.clientY;
         }
+
+        hoveredCardIndex = idx;
+        applyCardStates();
       };
 
-      const endHover = () => {
+      const handlePointerLeave = () => {
         if (hoveredCardIndex === idx) {
           hoveredCardIndex = -1;
           applyCardStates();
         }
       };
 
-      card.addEventListener('pointerenter', startHover);
-      card.addEventListener('pointerleave', endHover);
-      card.addEventListener('mouseenter', startHover);
-      card.addEventListener('mouseleave', endHover);
-
-      // On mobile touch: tap to temporarily highlight
-      card.addEventListener('touchstart', () => {
-        startHover();
-      }, { passive: true });
+      card.addEventListener('pointerenter', handlePointerEnterOrMove);
+      card.addEventListener('mouseenter', handlePointerEnterOrMove);
+      card.addEventListener('pointermove', handlePointerEnterOrMove);
+      card.addEventListener('mousemove', handlePointerEnterOrMove);
+      card.addEventListener('pointerleave', handlePointerLeave);
+      card.addEventListener('mouseleave', handlePointerLeave);
     });
 
-    // Clear hover when tapping anywhere outside project cards
-    document.addEventListener('touchstart', (e) => {
-      if (!e.target.closest('.project-card')) {
-        hoveredCardIndex = -1;
-        applyCardStates();
-      }
+    // Track cursor movement on window
+    window.addEventListener('mousemove', (e) => {
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
     }, { passive: true });
+
+    // Clear hover when leaving projects grid or clicking outside
+    projectsGrid.addEventListener('mouseleave', () => {
+      hoveredCardIndex = -1;
+      applyCardStates();
+    });
 
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.project-card')) {
@@ -233,15 +241,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Scroll & Touchmove Handler:
-    // Any scroll or finger movement IMMEDIATELY cancels hover and recalculates the centered card
+    // Scroll & Wheel Handler:
+    // Any scroll or wheel movement IMMEDIATELY cancels hover, releases card lock, and resumes scrolling effect
     const handleScrollOrMove = () => {
       isScrolling = true;
-      hoveredCardIndex = -1; // Clear any hover/touch lock immediately
+      projectsGrid.classList.add('is-scrolling');
+      hoveredCardIndex = -1; // Clear any card hover highlight immediately
+
+      // Immediately apply states so in-view scrolling effect resumes on desktop
+      applyCardStates();
 
       clearTimeout(scrollEndTimer);
       scrollEndTimer = setTimeout(() => {
         isScrolling = false;
+        projectsGrid.classList.remove('is-scrolling');
         applyCardStates();
       }, 150);
 
@@ -266,6 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('scroll', handleScrollOrMove, { passive: true });
+    window.addEventListener('wheel', handleScrollOrMove, { passive: true });
     window.addEventListener('touchmove', handleScrollOrMove, { passive: true });
     window.addEventListener('resize', requestCardUpdate, { passive: true });
     requestCardUpdate();

@@ -176,7 +176,7 @@ PORTFOLIO_DATA = {
             "description": "Active participation in India's First Tri-City AI-Thon 2026 held at KITSW, Warangal, demonstrating enthusiasm, creativity, and technical innovation in AI solutions.",
             "skills": ["Artificial Intelligence", "Machine Learning", "Innovation", "Problem-Solving"],
             "has_certificate": True,
-            "certificate_image": "images/tri_city_aithon.jpeg",
+            "certificate_image": "images/TriCity_AI-Thon_Participation_SADHIRA_AMANI.png",
             "icon_type": "certificate"
         },
         {
